@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "7ef7e087-dae4-4687-8854-9c38c19169f6",
+		"name": "Auto Generate Province District Ward",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38896618",
+		"_collection_link": "https://gocuong.postman.co/workspace/GoCuong-Workspace~1a4fb55f-e953-45eb-8272-d45564f1d31d/collection/34809438-7ef7e087-dae4-4687-8854-9c38c19169f6?action=share&source=collection_link&creator=38896618"
+	},
+	"item": [
+		{
+			"name": "get-province",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Define 'responseProvince' before using it in the script\r",
+							"let responseProvince = pm.response.json();\r",
+							"let min = 0;\r",
+							"let max = responseProvince.data.length - 1;\r",
+							"\r",
+							"function randomProvince(min, max) {\r",
+							"    return Math.random() * (max - min) + min;\r",
+							"\r",
+							"}\r",
+							"\r",
+							"let bien1 = Math.round(randomProvince(min, max));\r",
+							"let bien2 = Math.round(randomProvince(min, max));\r",
+							"let bien3 = Math.round(randomProvince(min, max));\r",
+							"pm.environment.set(\"ProvinceSender\", responseProvince.data[bien1].province_id);\r",
+							"pm.environment.set(\"ProvinceReceive\", responseProvince.data[bien2].province_id);\r",
+							"pm.environment.set(\"ProvinceReturn\", responseProvince.data[bien3].province_id);\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXN0ZXJNZXJjaGFudElkIjoiWXEwQ0VSMFJnZGh5ZXZjVUtFeWgvdEErYkFScEJxc1k3SkdFd1FYWjh2RUlNWnZCc0M1UHlSWHd1MTg1Z01INEpZZkQ2RUpVV051M0lzd056TXErUEE9PSIsInNlY3JldEtleSI6IlhXaTFWckVwdnZhS2NvR1hDT2gxOFpFSkJBdG11aGVYUkx5b3d3SlkzNEtjODlOU3JlS2tvUkd0Tm01cCtQcnJoOWtraGFCbUgzTlkwQTBjL2tFdEJBPT0iLCJleHAiOjE4MTIwNzk4MDV9.9FMxE7MsrWJACcZc90_7k8GF8X-yUye8IblA32WZOTo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{goship-evn}}/api/v1/goship/location/get-province",
+					"host": [
+						"{{goship-evn}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"goship",
+						"location",
+						"get-province"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-district Sender",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseDistrictS = pm.response.json();\r",
+							"\r",
+							"let min = 0;\r",
+							"let max = responseDistrictS.data.length - 1;\r",
+							"\r",
+							"function randomDistrict(min, max) {\r",
+							"    return Math.random() * (max - min) + min;\r",
+							"\r",
+							"}\r",
+							"\r",
+							"let district1 = Math.round(randomDistrict(min, max));\r",
+							"pm.environment.set(\"DistrictSender\", responseDistrictS.data[district1].district_id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXN0ZXJNZXJjaGFudElkIjoiWXEwQ0VSMFJnZGh5ZXZjVUtFeWgvdEErYkFScEJxc1k3SkdFd1FYWjh2RUlNWnZCc0M1UHlSWHd1MTg1Z01INEpZZkQ2RUpVV051M0lzd056TXErUEE9PSIsInNlY3JldEtleSI6IlhXaTFWckVwdnZhS2NvR1hDT2gxOFpFSkJBdG11aGVYUkx5b3d3SlkzNEtjODlOU3JlS2tvUkd0Tm01cCtQcnJoOWtraGFCbUgzTlkwQTBjL2tFdEJBPT0iLCJleHAiOjE4MTIwNzk4MDV9.9FMxE7MsrWJACcZc90_7k8GF8X-yUye8IblA32WZOTo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{goship-evn}}/api/v1/goship/location/get-district?province_id={{ProvinceSender}}",
+					"host": [
+						"{{goship-evn}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"goship",
+						"location",
+						"get-district"
+					],
+					"query": [
+						{
+							"key": "province_id",
+							"value": "{{ProvinceSender}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-district Receive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseDistrictR=pm.response.json();\r",
+							"let min = 0;\r",
+							"let max = responseDistrictR.data.length - 1;\r",
+							"\r",
+							"function randomDistrictR(min, max) {\r",
+							"    return Math.random() * (max - min) + min;\r",
+							"\r",
+							"}\r",
+							"\r",
+							"let district2 = Math.round(randomDistrictR(min, max));\r",
+							"pm.environment.set(\"DistrictReceive\", responseDistrictR.data[district2].district_id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXN0ZXJNZXJjaGFudElkIjoiWXEwQ0VSMFJnZGh5ZXZjVUtFeWgvdEErYkFScEJxc1k3SkdFd1FYWjh2RUlNWnZCc0M1UHlSWHd1MTg1Z01INEpZZkQ2RUpVV051M0lzd056TXErUEE9PSIsInNlY3JldEtleSI6IlhXaTFWckVwdnZhS2NvR1hDT2gxOFpFSkJBdG11aGVYUkx5b3d3SlkzNEtjODlOU3JlS2tvUkd0Tm01cCtQcnJoOWtraGFCbUgzTlkwQTBjL2tFdEJBPT0iLCJleHAiOjE4MTIwNzk4MDV9.9FMxE7MsrWJACcZc90_7k8GF8X-yUye8IblA32WZOTo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{goship-evn}}/api/v1/goship/location/get-district?province_id={{ProvinceReceive}}",
+					"host": [
+						"{{goship-evn}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"goship",
+						"location",
+						"get-district"
+					],
+					"query": [
+						{
+							"key": "province_id",
+							"value": "{{ProvinceReceive}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-district Return",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseDistrictRu=pm.response.json();\r",
+							"let min = 0;\r",
+							"let max = responseDistrictRu.data.length - 1;\r",
+							"\r",
+							"function randomDistrictRu(min, max) {\r",
+							"    return Math.random() * (max - min) + min;\r",
+							"\r",
+							"}\r",
+							"\r",
+							"let district3 = Math.round(randomDistrictRu(min, max));\r",
+							"pm.environment.set(\"DistrictReturn\", responseDistrictRu.data[district3].district_id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXN0ZXJNZXJjaGFudElkIjoiWXEwQ0VSMFJnZGh5ZXZjVUtFeWgvdEErYkFScEJxc1k3SkdFd1FYWjh2RUlNWnZCc0M1UHlSWHd1MTg1Z01INEpZZkQ2RUpVV051M0lzd056TXErUEE9PSIsInNlY3JldEtleSI6IlhXaTFWckVwdnZhS2NvR1hDT2gxOFpFSkJBdG11aGVYUkx5b3d3SlkzNEtjODlOU3JlS2tvUkd0Tm01cCtQcnJoOWtraGFCbUgzTlkwQTBjL2tFdEJBPT0iLCJleHAiOjE4MTIwNzk4MDV9.9FMxE7MsrWJACcZc90_7k8GF8X-yUye8IblA32WZOTo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{goship-evn}}/api/v1/goship/location/get-district?province_id={{ProvinceReturn}}",
+					"host": [
+						"{{goship-evn}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"goship",
+						"location",
+						"get-district"
+					],
+					"query": [
+						{
+							"key": "province_id",
+							"value": "{{ProvinceReturn}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-ward Sender",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseWardS = pm.response.json()\r",
+							"let min = 0;\r",
+							"let max = responseWardS.data.length - 1;\r",
+							"\r",
+							"function randomWardS(min, max) {\r",
+							"    return Math.random() * (max - min) + min;\r",
+							"\r",
+							"}\r",
+							"\r",
+							"let ward1 = Math.round(randomWardS(min, max));\r",
+							"pm.environment.set(\"WardSender\", responseWardS.data[ward1].ward_id)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXN0ZXJNZXJjaGFudElkIjoiWXEwQ0VSMFJnZGh5ZXZjVUtFeWgvdEErYkFScEJxc1k3SkdFd1FYWjh2RUlNWnZCc0M1UHlSWHd1MTg1Z01INEpZZkQ2RUpVV051M0lzd056TXErUEE9PSIsInNlY3JldEtleSI6IlhXaTFWckVwdnZhS2NvR1hDT2gxOFpFSkJBdG11aGVYUkx5b3d3SlkzNEtjODlOU3JlS2tvUkd0Tm01cCtQcnJoOWtraGFCbUgzTlkwQTBjL2tFdEJBPT0iLCJleHAiOjE4MTIwNzk4MDV9.9FMxE7MsrWJACcZc90_7k8GF8X-yUye8IblA32WZOTo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{goship-evn}}/api/v1/goship/location/get-ward?province_id={{ProvinceSender}}&district_id={{DistrictSender}}",
+					"host": [
+						"{{goship-evn}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"goship",
+						"location",
+						"get-ward"
+					],
+					"query": [
+						{
+							"key": "province_id",
+							"value": "{{ProvinceSender}}"
+						},
+						{
+							"key": "district_id",
+							"value": "{{DistrictSender}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-ward Receive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseWardR = pm.response.json()\r",
+							"let min = 0;\r",
+							"let max = responseWardR.data.length - 1;\r",
+							"\r",
+							"function randomWardR(min, max) {\r",
+							"    return Math.random() * (max - min) + min;\r",
+							"\r",
+							"}\r",
+							"\r",
+							"let ward2 = Math.round(randomWardR(min, max));\r",
+							"pm.environment.set(\"WardReceive\", responseWardR.data[ward2].ward_id)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXN0ZXJNZXJjaGFudElkIjoiWXEwQ0VSMFJnZGh5ZXZjVUtFeWgvdEErYkFScEJxc1k3SkdFd1FYWjh2RUlNWnZCc0M1UHlSWHd1MTg1Z01INEpZZkQ2RUpVV051M0lzd056TXErUEE9PSIsInNlY3JldEtleSI6IlhXaTFWckVwdnZhS2NvR1hDT2gxOFpFSkJBdG11aGVYUkx5b3d3SlkzNEtjODlOU3JlS2tvUkd0Tm01cCtQcnJoOWtraGFCbUgzTlkwQTBjL2tFdEJBPT0iLCJleHAiOjE4MTIwNzk4MDV9.9FMxE7MsrWJACcZc90_7k8GF8X-yUye8IblA32WZOTo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{goship-evn}}/api/v1/goship/location/get-ward?province_id={{ProvinceReceive}}&district_id={{DistrictReceive}}",
+					"host": [
+						"{{goship-evn}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"goship",
+						"location",
+						"get-ward"
+					],
+					"query": [
+						{
+							"key": "province_id",
+							"value": "{{ProvinceReceive}}"
+						},
+						{
+							"key": "district_id",
+							"value": "{{DistrictReceive}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-ward Return",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseWardRu = pm.response.json()\r",
+							"let min = 0;\r",
+							"let max = responseWardRu.data.length - 1;\r",
+							"\r",
+							"function randomWardRu(min, max) {\r",
+							"    return Math.random() * (max - min) + min;\r",
+							"\r",
+							"}\r",
+							"\r",
+							"let ward3 = Math.round(randomWardRu(min, max));\r",
+							"pm.environment.set(\"WardReturn\", responseWardRu.data[ward3].ward_id)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYXN0ZXJNZXJjaGFudElkIjoiWXEwQ0VSMFJnZGh5ZXZjVUtFeWgvdEErYkFScEJxc1k3SkdFd1FYWjh2RUlNWnZCc0M1UHlSWHd1MTg1Z01INEpZZkQ2RUpVV051M0lzd056TXErUEE9PSIsInNlY3JldEtleSI6IlhXaTFWckVwdnZhS2NvR1hDT2gxOFpFSkJBdG11aGVYUkx5b3d3SlkzNEtjODlOU3JlS2tvUkd0Tm01cCtQcnJoOWtraGFCbUgzTlkwQTBjL2tFdEJBPT0iLCJleHAiOjE4MTIwNzk4MDV9.9FMxE7MsrWJACcZc90_7k8GF8X-yUye8IblA32WZOTo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{goship-evn}}/api/v1/goship/location/get-ward?province_id={{ProvinceReturn}}&district_id={{DistrictReturn}}",
+					"host": [
+						"{{goship-evn}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"goship",
+						"location",
+						"get-ward"
+					],
+					"query": [
+						{
+							"key": "province_id",
+							"value": "{{ProvinceReturn}}"
+						},
+						{
+							"key": "district_id",
+							"value": "{{DistrictReturn}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
