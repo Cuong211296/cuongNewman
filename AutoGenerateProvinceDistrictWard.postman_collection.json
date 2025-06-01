@@ -30,6 +30,9 @@
 							"pm.environment.set(\"ProvinceSender\", responseProvince.data[bien1].province_id);\r",
 							"pm.environment.set(\"ProvinceReceive\", responseProvince.data[bien2].province_id);\r",
 							"pm.environment.set(\"ProvinceReturn\", responseProvince.data[bien3].province_id);\r",
+							"pm.test(\"Province API should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
 							"\r",
 							"\r",
 							""
@@ -87,7 +90,10 @@
 							"\r",
 							"let district1 = Math.round(randomDistrict(min, max));\r",
 							"pm.environment.set(\"DistrictSender\", responseDistrictS.data[district1].district_id);\r",
-							""
+							"\r",
+							"pm.test(\"DistrictSender API should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -147,7 +153,10 @@
 							"\r",
 							"let district2 = Math.round(randomDistrictR(min, max));\r",
 							"pm.environment.set(\"DistrictReceive\", responseDistrictR.data[district2].district_id);\r",
-							""
+							"\r",
+							"pm.test(\"DistrictReceive API should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -207,7 +216,9 @@
 							"\r",
 							"let district3 = Math.round(randomDistrictRu(min, max));\r",
 							"pm.environment.set(\"DistrictReturn\", responseDistrictRu.data[district3].district_id);\r",
-							""
+							"pm.test(\"DistrictReturn API should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -266,7 +277,10 @@
 							"}\r",
 							"\r",
 							"let ward1 = Math.round(randomWardS(min, max));\r",
-							"pm.environment.set(\"WardSender\", responseWardS.data[ward1].ward_id)"
+							"pm.environment.set(\"WardSender\", responseWardS.data[ward1].ward_id)\r",
+							"pm.test(\"WardSender API should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -329,7 +343,11 @@
 							"}\r",
 							"\r",
 							"let ward2 = Math.round(randomWardR(min, max));\r",
-							"pm.environment.set(\"WardReceive\", responseWardR.data[ward2].ward_id)"
+							"pm.environment.set(\"WardReceive\", responseWardR.data[ward2].ward_id)\r",
+							"\r",
+							"pm.test(\"WardReceive API should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -392,7 +410,10 @@
 							"}\r",
 							"\r",
 							"let ward3 = Math.round(randomWardRu(min, max));\r",
-							"pm.environment.set(\"WardReturn\", responseWardRu.data[ward3].ward_id)"
+							"pm.environment.set(\"WardReturn\", responseWardRu.data[ward3].ward_id)\r",
+							"pm.test(\"WardReturn API should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
